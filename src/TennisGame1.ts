@@ -16,18 +16,12 @@ export class TennisGame1 implements TennisGame {
 		}
 	}
 }
-const getScoreForDraw = (score: number) => {
-	switch (score) {
-		case 0:
-			return "Love-All";
-		case 1:
-			return "Fifteen-All";
-		case 2:
-			return "Thirty-All";
-		default:
-			return "Deuce";
-	}
+
+const getScoreForDraw = (points: number) => {	
+	if (points < 3) return `${getPointsAsAString(points)}-All`;
+	return "Deuce";
 };
+
 const getScoreForAdvantagesAndWins = (score1: number, score2: number) => {
 	const minusResult: number = score1 - score2;
 	if (minusResult === 1) return "Advantage player1";
@@ -35,29 +29,21 @@ const getScoreForAdvantagesAndWins = (score1: number, score2: number) => {
 	else if (minusResult >= 2) return "Win for player1";
 	else return "Win for player2";
 };
-const getNonDrawScoreBeforeDeuce = (score1: number, score2: number) => {
-	let score: string = "";
-	let tempScore: number = 0;
-	for (let i = 1; i < 3; i++) {
-		if (i === 1) tempScore = score1;
-		else {
-			score += "-";
-			tempScore = score2;
-		}
-		switch (tempScore) {
-			case 0:
-				score += "Love";
-				break;
-			case 1:
-				score += "Fifteen";
-				break;
-			case 2:
-				score += "Thirty";
-				break;
-			case 3:
-				score += "Forty";
-				break;
-		}
+
+const getNonDrawScoreBeforeDeuce = (score1: number, score2: number) => `${getPointsAsAString(score1)}-${getPointsAsAString(score2)}`;
+
+const getPointsAsAString = (tempScore: number) => {
+	switch (tempScore) {
+		case 0:
+			return "Love";
+		case 1:
+			return "Fifteen";
+		case 2:
+			return "Thirty";
+		case 3:
+			return "Forty";
+
+		default:
+			throw new Error();
 	}
-	return score;
 };
