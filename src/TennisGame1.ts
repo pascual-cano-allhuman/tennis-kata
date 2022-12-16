@@ -7,15 +7,19 @@ export class TennisGame1 implements TennisGame {
 		else this.score2 += 1;
 	}
 	getScore(): string {
-		if (this.score1 === this.score2) {
-			return getScoreForDraw(this.score1);
-		} else if (this.score1 >= 4 || this.score2 >= 4) {
-			return getScoreForAdvantagesAndWins(this.score1, this.score2);
-		} else {
-			return getNonDrawScoreBeforeDeuce(this.score1, this.score2);
-		}
+		return getScore(this.score1, this.score2);
 	}
 }
+
+const getScore = (score1: number, score2: number):string => {
+	if (score1 === score2) {
+		return getScoreForDraw(score1);
+	} else if (score1 >= 4 || score2 >= 4) {
+		return getScoreForAdvantagesAndWins(score1, score2);
+	} else {
+		return getNonDrawScoreBeforeDeuce(score1, score2);
+	}
+};
 
 const getScoreForDraw = (points: number) => {	
 	if (points < 3) return `${getPointsAsAString(points)}-All`;
