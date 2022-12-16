@@ -15,11 +15,7 @@ export class TennisGame1 implements TennisGame {
 		if (this.score1 === this.score2) {
 			return getScoreForDraw(this.score1);
 		} else if (this.score1 >= 4 || this.score2 >= 4) {
-			const minusResult: number = this.score1 - this.score2;
-			if (minusResult === 1) score = "Advantage player1";
-			else if (minusResult === -1) score = "Advantage player2";
-			else if (minusResult >= 2) score = "Win for player1";
-			else score = "Win for player2";
+			return getScoreForAdvantagesAndWins(this.score1,this.score2);
 		} else {
 			for (let i = 1; i < 3; i++) {
 				if (i === 1) tempScore = this.score1;
@@ -59,3 +55,11 @@ const getScoreForDraw = (score: number) => {
 			return "Deuce";
 	}
 };
+
+const getScoreForAdvantagesAndWins=(score1:number,score2:number)=> {
+	const minusResult: number = score1 - score2;
+	if (minusResult === 1) return "Advantage player1";
+	else if (minusResult === -1) return "Advantage player2";
+	else if (minusResult >= 2) return "Win for player1";
+	else return "Win for player2";
+}
