@@ -10,33 +10,37 @@ export class TennisGame1 implements TennisGame {
 	}
 
 	getScore(): string {
-		let score: string = "";
-		let tempScore: number = 0;
 		if (this.m_score1 === this.m_score2) {
 			return TennisGame1.getScoreWhenTie(this.m_score1);
 		} else if (this.m_score1 >= 4 || this.m_score2 >= 4) {
 			return TennisGame1.getScoreForAdvantagesAndWins(this.m_score1, this.m_score2);
 		} else {
-			for (let i = 1; i < 3; i++) {
-				if (i === 1) tempScore = this.m_score1;
-				else {
-					score += "-";
-					tempScore = this.m_score2;
-				}
-				switch (tempScore) {
-					case 0:
-						score += "Love";
-						break;
-					case 1:
-						score += "Fifteen";
-						break;
-					case 2:
-						score += "Thirty";
-						break;
-					case 3:
-						score += "Forty";
-						break;
-				}
+			return TennisGame1.getScoresBelowDeuce(this.m_score1, this.m_score2);
+		}
+	}
+
+	private static getScoresBelowDeuce(score1: number, score2: number) {
+		let score: string = "";
+		let tempScore: number = 0;
+		for (let i = 1; i < 3; i++) {
+			if (i === 1) tempScore = score1;
+			else {
+				score += "-";
+				tempScore = score2;
+			}
+			switch (tempScore) {
+				case 0:
+					score += "Love";
+					break;
+				case 1:
+					score += "Fifteen";
+					break;
+				case 2:
+					score += "Thirty";
+					break;
+				case 3:
+					score += "Forty";
+					break;
 			}
 		}
 		return score;
