@@ -28,20 +28,7 @@ export class TennisGame1 implements TennisGame {
 				score += "-";
 				tempScore = score2;
 			}
-			switch (tempScore) {
-				case 0:
-					score += "Love";
-					break;
-				case 1:
-					score += "Fifteen";
-					break;
-				case 2:
-					score += "Thirty";
-					break;
-				case 3:
-					score += "Forty";
-					break;
-			}
+			score += TennisGame1.getPointsAsString(tempScore);
 		}
 		return score;
 	}
@@ -54,16 +41,23 @@ export class TennisGame1 implements TennisGame {
 		else return "Win for player2";
 	}
 
-	private static getScoreWhenTie(tieScore: number) {
-		switch (tieScore) {
+	private static getScoreWhenTie(points: number) {
+		if (points > 2) return "Deuce";
+		else return `${TennisGame1.getPointsAsString(points)}-All`;
+	}
+
+	private static getPointsAsString(points: number) {
+		switch (points) {
 			case 0:
-				return "Love-All";
+				return "Love";
 			case 1:
-				return "Fifteen-All";
+				return "Fifteen";
 			case 2:
-				return "Thirty-All";
+				return "Thirty";
+			case 3:
+				return "Forty";
 			default:
-				return "Deuce";
+				return "";
 		}
 	}
 }
