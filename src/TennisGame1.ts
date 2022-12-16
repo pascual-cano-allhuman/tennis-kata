@@ -10,12 +10,16 @@ export class TennisGame1 implements TennisGame {
 	}
 
 	getScore(): string {
-		if (this.m_score1 === this.m_score2) {
-			return TennisGame1.getScoreWhenTie(this.m_score1);
-		} else if (this.m_score1 >= 4 || this.m_score2 >= 4) {
-			return TennisGame1.getScoreForAdvantagesAndWins(this.m_score1, this.m_score2);
+		return TennisGame1.getScore(this.m_score1, this.m_score2);
+	}
+
+	private static getScore(score1: number, score2: number): string {
+		if (score1 === score2) {
+			return TennisGame1.getScoreWhenTie(score1);
+		} else if (score1 >= 4 || score2 >= 4) {
+			return TennisGame1.getScoreForAdvantagesAndWins(score1, score2);
 		} else {
-			return TennisGame1.getScoresBelowDeuce(this.m_score1, this.m_score2);
+			return TennisGame1.getScoresBelowDeuce(score1, score2);
 		}
 	}
 
