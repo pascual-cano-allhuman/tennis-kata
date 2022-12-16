@@ -15,11 +15,7 @@ export class TennisGame1 implements TennisGame {
 		if (this.m_score1 === this.m_score2) {
 			return TennisGame1.getScoreWhenTie(this.m_score1);
 		} else if (this.m_score1 >= 4 || this.m_score2 >= 4) {
-			const minusResult: number = this.m_score1 - this.m_score2;
-			if (minusResult === 1) score = "Advantage player1";
-			else if (minusResult === -1) score = "Advantage player2";
-			else if (minusResult >= 2) score = "Win for player1";
-			else score = "Win for player2";
+			return TennisGame1.getScoreForAdvantagesAndWins(this.m_score1, this.m_score2);
 		} else {
 			for (let i = 1; i < 3; i++) {
 				if (i === 1) tempScore = this.m_score1;
@@ -44,6 +40,14 @@ export class TennisGame1 implements TennisGame {
 			}
 		}
 		return score;
+	}
+
+	private static getScoreForAdvantagesAndWins(score1: number, score2: number) {
+		const minusResult: number = score1 - score2;
+		if (minusResult === 1) return "Advantage player1";
+		else if (minusResult === -1) return "Advantage player2";
+		else if (minusResult >= 2) return "Win for player1";
+		else return "Win for player2";
 	}
 
 	private static getScoreWhenTie(tieScore: number) {
