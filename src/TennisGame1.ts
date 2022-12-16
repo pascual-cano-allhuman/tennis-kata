@@ -20,17 +20,7 @@ export class TennisGame1 implements TennisGame {
 	}
 
 	private static getScoresBelowDeuce(score1: number, score2: number) {
-		let score: string = "";
-		let tempScore: number = 0;
-		for (let i = 1; i < 3; i++) {
-			if (i === 1) tempScore = score1;
-			else {
-				score += "-";
-				tempScore = score2;
-			}
-			score += TennisGame1.getPointsAsString(tempScore);
-		}
-		return score;
+		return `${TennisGame1.getPointsAsString(score1)}-${TennisGame1.getPointsAsString(score2)}`;
 	}
 
 	private static getScoreForAdvantagesAndWins(score1: number, score2: number) {
